@@ -33,7 +33,7 @@ k8s-deploy:
   - echo "$GOOGLE_KEY" > key.json
   - gcloud auth activate-service-account --key-file key.json
   - gcloud config set compute/zone us-central1-a
-  - gcloud config set project CheckYourSpend
+  - gcloud config set project fit-reducer-186720
   - gcloud config set container/use_client_certificate True
   - gcloud container clusters get-credentials CheckYourSpend
   - kubectl delete secret registry.gitlab.com
