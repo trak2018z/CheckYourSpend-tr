@@ -1,16 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: CheckYourSpend
+  name: checkyourspend
 spec:
   replicas: 2
   template:
     metadata:
       labels:
-        app: CheckYourSpend
+        app: checkyourspend
     spec:
       containers:
-      - name: CheckYourSpend
+      - name: checkyourspend
         image: registry.gitlab.com/rad1317/CheckYourSpend
         imagePullPolicy: Always
         ports:
