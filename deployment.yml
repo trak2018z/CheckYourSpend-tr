@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: CheckYourSpend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: CheckYourSpend
+    spec:
+      containers:
+      - name: CheckYourSpend
+        image: registry.gitlab.com/rad1317/CheckYourSpend
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: registry.gitlab.com
