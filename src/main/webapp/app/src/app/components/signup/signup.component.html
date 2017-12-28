@@ -1,0 +1,56 @@
+<div fxLayout='row' fxLayoutAlign="space-around">
+  <div fxFlex="20" fxFlex.lt-xl="30" fxFlex.lt-lg="40" fxFlex.lt-md="50" fxFlex.lt-sm="60">
+    <div class="c-app-signup-container">
+      <mat-card>
+        <mat-card-header>
+          <div style="margin: auto">
+            <i class="fa fa-user-circle fa-5x" style="font-size: 10em;" aria-hidden="true"></i>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <div fxLayout='column'>
+            <div fxLayout='row'>
+              <div fxFlex="10" style="padding-top: 10px">
+                <i class="material-icons md-24">input</i>
+              </div>
+              <div fxFlex>
+                <mat-form-field class="c-app-signup-fullwidth">
+                  <input matInput placeholder="Username" [(ngModel)]="accountCredentialsDto.username">
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout='row'>
+              <div fxFlex="10" style="padding-top: 10px">
+                <i class="material-icons md-24">input</i>
+              </div>
+              <div fxFlex>
+                <mat-form-field class="c-app-signup-fullwidth">
+                  <input matInput placeholder="Password" [type]="password" [(ngModel)]="accountCredentialsDto.password">
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout='row'>
+              <div fxFlex="10" style="padding-top: 10px">
+                <i class="material-icons md-24">input</i>
+              </div>
+              <div fxFlex>
+                <mat-form-field class="c-app-signup-fullwidth">
+                  <input matInput placeholder="Repeated Password" [type]="password" [(ngModel)]="accountCredentialsDto.repeatedPassword">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div fxLayout='column'>
+            <div fxFlex>
+              <div fxLayoutAlign="center">
+                <button mat-button (click)="createAccount()">Sign Up</button>
+              </div>
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

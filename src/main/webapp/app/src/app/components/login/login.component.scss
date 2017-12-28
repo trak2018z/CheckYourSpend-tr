@@ -1,0 +1,19 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+.c-app-login-container {
+  padding-top: 100px;
+  p, i {
+      color: mat-color(mat-palette($mat-green, 400));
+  }
+}
+.c-app-login-fullwidth {
+  width: 100%;
+}
+.c-app-login-signup{
+    font-size: 12px;
+}
+a {
+    cursor: pointer;
+    border-bottom: 1px solid mat-color(mat-palette($mat-green, 300));
+}
