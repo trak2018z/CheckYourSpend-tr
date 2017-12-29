@@ -1,3 +1,19 @@
-<p>
-  home works!
-</p>
+<div fxLayoutAlign="space-around">
+  <div fxFlex="80" fxFlex.lg="85" fxFlex.lt-lg="85">
+    <div fxLayout='row' fxLayout.lg='column' fxLayout.lt-lg='column' class="c-app-home-container">
+      <div fxFlex="50" class="c-app-home-card">
+        <app-chart-manager></app-chart-manager>
+      </div>
+      <div fxFlex="50" class="c-app-home-card">
+        <app-last-spend-viewer></app-last-spend-viewer>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="position: fixed;
+right: 40px;
+bottom: 40px;">
+  <button mat-fab (click)="openManager()">
+    <mat-icon aria-label="Add new spends">mode_edit</mat-icon>
+  </button>
+</div>

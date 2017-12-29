@@ -1,0 +1,54 @@
+<div fxLayout='column'>
+  <div fxLayout='row'>
+    <div fxFlex="10" style="padding-top: 10px">
+      <i class="material-icons md-24">input</i>
+    </div>
+    <div fxFlex>
+      <mat-form-field class="c-app-spend-desinger-fullwidth">
+        <input matInput placeholder="Value" [(ngModel)]="value" currencyMask [options]="{prefix: ' ', thousands: ' ', decimal: ',' }" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout='row'>
+    <div fxFlex="10" style="padding-top: 10px">
+      <i class="material-icons md-24">input</i>
+    </div>
+    <div fxFlex>
+      <mat-form-field class="c-app-spend-desinger-fullwidth">
+        <input matInput placeholder="Description" [type]="input">
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout='row'>
+    <div fxFlex="10" style="padding-top: 10px">
+      <i class="material-icons md-24">input</i>
+    </div>
+    <div fxFlex>
+      <mat-form-field class="c-app-spend-desinger-fullwidth">
+        <input matInput [matDatepicker]="picker" placeholder="Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout='row'>
+    <div fxFlex="10" style="padding-top: 10px">
+      <i class="material-icons md-24">input</i>
+    </div>
+    <div fxFlex>
+      <mat-form-field class="c-app-spend-desinger-fullwidth">
+        <mat-select placeholder="Category">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout='row'>
+    <div fxFlex>
+      <div fxLayoutAlign="end">
+        <button mat-button (click)="onCloseDialog()">Cancel</button>
+        <button mat-button>Save</button>
+      </div>
+    </div>
+  </div>
+</div>

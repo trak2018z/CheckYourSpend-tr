@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>Check Your Spend</span>
+  <span routerLink="/home" style="cursor: pointer">Check Your Spend</span>
   <div fxFlex>
     <div fxLayoutAlign="end">
       <button *ngIf="isUserLogin" (click)="logout()" class="c-app-main-button" mat-button>LogOut</button>
