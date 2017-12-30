@@ -1,3 +1,4 @@
+import { ExpenditureServiceService } from './core/service/expenditure-service.service';
 import { SignupService } from './core/service/signup.service';
 import { AuthService } from './core/security/auth.service';
 import { NgModule } from '@angular/core';
@@ -29,6 +30,7 @@ import {
 } from './components/spend-manager/spend/components/spend-desinger/spend-desinger.component';
 import { DialogManagerComponent } from './components/home/dialog-manager/dialog-manager.component';
 import { LastSpendViewerComponent } from './components/last-spend-viewer/last-spend-viewer.component';
+import { CategoriesManagerComponent } from './components/categories-manager/categories-manager.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { LastSpendViewerComponent } from './components/last-spend-viewer/last-sp
     SpendDesingerComponent,
     SpendDesingerDialogComponent,
     DialogManagerComponent,
-    LastSpendViewerComponent
+    LastSpendViewerComponent,
+    CategoriesManagerComponent
   ],
   entryComponents: [
     SpendManagerDialogComponent,
@@ -67,6 +70,7 @@ import { LastSpendViewerComponent } from './components/last-spend-viewer/last-sp
     },
     AuthService,
     SignupService,
+    ExpenditureServiceService,
     DatePipe
   ],
   bootstrap: [AppComponent]

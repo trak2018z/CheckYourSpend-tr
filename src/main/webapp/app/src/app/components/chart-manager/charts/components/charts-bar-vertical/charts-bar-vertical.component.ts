@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Spend } from './../../../../spend-manager/spend/model/spend.interface';
+import { Spend } from './../../../../spend-manager/spend/model/spend';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 

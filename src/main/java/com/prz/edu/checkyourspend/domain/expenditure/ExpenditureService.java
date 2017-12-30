@@ -1,7 +1,40 @@
 package com.prz.edu.checkyourspend.domain.expenditure;
 
+import com.prz.edu.checkyourspend.assembler.ExpenditureAssembler;
+import com.prz.edu.checkyourspend.domain.expenditure.model.Expenditure;
+import com.prz.edu.checkyourspend.domain.expenditure.repository.ExpenditureRepository;
+import com.prz.edu.checkyourspend.domain.user.UserService;
+import com.prz.edu.checkyourspend.domain.user.model.User;
+import com.prz.edu.checkyourspend.webui.expenditure.dto.ExpenditureDto;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ExpenditureService {
+
+    private ExpenditureAssembler expenditureAssembler;
+    private ExpenditureRepository expenditureRepository;
+    private UserService userService;
+
+    public ExpenditureService(ExpenditureAssembler expenditureAssembler, ExpenditureRepository expenditureRepository, UserService userService) {
+        this.expenditureAssembler = expenditureAssembler;
+        this.expenditureRepository = expenditureRepository;
+        this.userService = userService;
+    }
+
+    public ExpenditureDto save(ExpenditureDto expenditureDto) {
+        Expenditure expenditure = expenditureAssembler.map(expenditureDto);
+
+        User user = userService.getCurrentUser();
+        expenditure.setUser(user);
+
+        expenditure = expenditureRepository.save(expenditure);
+        return expenditureAssembler.map(expenditure);
+    }
+
+    public List<ExpenditureDto> getAllExpenditureForCurrentUser(){
+        List<Expenditure> expenditures = expenditureRepository.findByUserLogin(userService.getCurrentUser().getLogin());
+        return expenditureAssembler.map(expenditures);
+    }
 }

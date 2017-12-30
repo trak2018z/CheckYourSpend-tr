@@ -1,5 +1,6 @@
 package com.prz.edu.checkyourspend.domain.user;
 
+import com.prz.edu.checkyourspend.core.authentication.UserDetailsServiceImpl;
 import com.prz.edu.checkyourspend.core.authentication.model.AccountCredentials;
 import com.prz.edu.checkyourspend.core.authentication.model.AccountCredentialsRepository;
 import com.prz.edu.checkyourspend.domain.user.model.User;
@@ -13,16 +14,19 @@ import java.util.List;
 @Service
 public class UserService {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    AccountCredentialsRepository accountCredentialsRepository;
+    private AccountCredentialsRepository accountCredentialsRepository;
 
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, AccountCredentialsRepository accountCredentialsRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    private UserDetailsServiceImpl userDetailsService;
+
+    public UserService(UserRepository userRepository, AccountCredentialsRepository accountCredentialsRepository, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsServiceImpl userDetailsService) {
         this.userRepository = userRepository;
         this.accountCredentialsRepository = accountCredentialsRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userDetailsService = userDetailsService;
     }
 
     public List<User> getAll() {
@@ -47,5 +51,9 @@ public class UserService {
         }
 
         return false;
+    }
+
+    public User getCurrentUser() {
+        return userRepository.findByLogin(userDetailsService.getUsernameFromToken());
     }
 }

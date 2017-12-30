@@ -25,4 +25,9 @@ export class DialogManagerComponent implements OnInit {
     this.dialogRef.close();
     this.router.navigate(['spends-manager']);
   }
+
+  openCategoriesManager() {
+    this.dialogRef.close();
+    this.router.navigate(['categories-manager']);
+  }
 }

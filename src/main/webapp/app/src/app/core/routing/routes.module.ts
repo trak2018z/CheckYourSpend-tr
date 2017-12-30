@@ -1,3 +1,4 @@
+import { CategoriesManagerComponent } from './../../components/categories-manager/categories-manager.component';
 import { AuthGuard } from './../security/auth.guard';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './../../components/home/home.component';
@@ -13,6 +14,11 @@ const ROUTES: Routes = [
   {
     path: 'spends-manager',
     component: SpendManagerComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'categories-manager',
+    component: CategoriesManagerComponent,
     canActivate: [AuthGuard]
   },
   { path: '**', component: HomeComponent, canActivate: [AuthGuard] }

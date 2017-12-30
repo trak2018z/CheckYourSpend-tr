@@ -1,4 +1,4 @@
-import { Spend } from './../spend-manager/spend/model/spend.interface';
+import { Spend } from './../spend-manager/spend/model/spend';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 

@@ -2,6 +2,8 @@ package com.prz.edu.checkyourspend.core.authentication;
 
 import com.prz.edu.checkyourspend.core.authentication.model.AccountCredentials;
 import com.prz.edu.checkyourspend.core.authentication.model.AccountCredentialsRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,5 +28,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         return new User(accountCredentials.getUsername(), accountCredentials.getPassword(), Collections.emptyList());
+    }
+
+    public String getUsernameFromToken(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null)
+            return authentication.getName();
+        return null;
     }
 }

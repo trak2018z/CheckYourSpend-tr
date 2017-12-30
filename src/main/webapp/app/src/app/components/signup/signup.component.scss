@@ -2,7 +2,6 @@
 @include mat-core();
 
 .c-app-signup-container {
-  padding-top: 100px;
   p, i {
       color: mat-color(mat-palette($mat-green, 400));
   }

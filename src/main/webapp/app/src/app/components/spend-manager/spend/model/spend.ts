@@ -1,4 +1,4 @@
-export interface Spend {
+export class Spend {
   id: number;
   description: string;
   value: number;

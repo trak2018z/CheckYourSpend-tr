@@ -1,6 +1,8 @@
 package com.prz.edu.checkyourspend.domain.expenditure.model;
 
+import com.prz.edu.checkyourspend.domain.category.model.Category;
 import com.prz.edu.checkyourspend.domain.shop.model.Shop;
+import com.prz.edu.checkyourspend.domain.user.model.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,14 +19,12 @@ public class Expenditure {
     private Double value;
 
     @ManyToOne
-    private Shop shop;
+    private Category category;
 
     private String description;
 
     private Date date;
 
-    private String transactionType;
-
-    private String currency;
-
+    @ManyToOne
+    private User user;
 }

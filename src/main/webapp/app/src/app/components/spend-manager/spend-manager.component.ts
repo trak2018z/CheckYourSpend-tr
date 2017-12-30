@@ -1,4 +1,6 @@
-import { Spend } from './spend/model/spend.interface';
+import { SpendDesingerDialogComponent } from './spend/components/spend-desinger/spend-desinger.component';
+import { ExpenditureServiceService } from './../../core/service/expenditure-service.service';
+import { Spend } from './spend/model/spend';
 import {
   MatTableDataSource,
   MatDialog,
@@ -13,9 +15,25 @@ import { Component, OnInit, Inject } from '@angular/core';
   styleUrls: ['./spend-manager.component.scss']
 })
 export class SpendManagerComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private expenditureServiceService: ExpenditureServiceService
+  ) {}
+  displayedColumns = [
+    'position',
+    'description',
+    'value',
+    'date',
+    'category',
+    'action'
+  ];
 
-  ngOnInit() {}
+  dataSource: MatTableDataSource<Spend>;
+  ngOnInit() {
+    this.expenditureServiceService.getAll().subscribe(result => {
+      this.dataSource = new MatTableDataSource<Spend>(result);
+    });
+  }
 
   openSpendCreator(): void {
     const dialogRef = this.dialog.open(SpendManagerDialogComponent, {
@@ -23,6 +41,19 @@ export class SpendManagerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  edit(spend: Spend) {
+    const dialogRef = this.dialog.open(SpendDesingerDialogComponent, {
+      width: '450px',
+      data: spend
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.expenditureServiceService.getAll().subscribe(o => {
+        this.dataSource = new MatTableDataSource<Spend>(o);
+      });
+    });
   }
 }
 

@@ -9,7 +9,7 @@ export const TOKEN_NAME: string = 'jwt_token';
 export class AuthService {
   @Output()
   public userLogin: EventEmitter<Boolean> = new EventEmitter<Boolean>();
-  private url: string = './api';
+  private url: string = './api/user';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient) {}
