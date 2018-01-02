@@ -16,7 +16,7 @@ public class ExpenditureController {
         this.expenditureService = expenditureService;
     }
 
-    @PostMapping(value = "/save")
+    @PostMapping(value = "/save/save")
     public ResponseEntity addNewExpenditure(@RequestBody ExpenditureDto expenditureDto) {
         return ResponseEntity.ok(expenditureService.save(expenditureDto));
     }
