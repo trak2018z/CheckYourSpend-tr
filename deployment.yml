@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: checkyourspend
@@ -17,3 +17,5 @@ spec:
         - containerPort: 8080
       imagePullSecrets:
         - name: registry.gitlab.com
+  strategy:
+    type: RollingUpdate
