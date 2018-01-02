@@ -1,5 +1,5 @@
 import { SpendDesingerDialogComponent } from './spend/components/spend-desinger/spend-desinger.component';
-import { ExpenditureServiceService } from './../../core/service/expenditure-service.service';
+import { ExpenditureService } from './../../core/service/expenditure.service';
 import { Spend } from './spend/model/spend';
 import {
   MatTableDataSource,
@@ -17,7 +17,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class SpendManagerComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
-    private expenditureServiceService: ExpenditureServiceService
+    private expenditureService: ExpenditureService
   ) {}
   displayedColumns = [
     'position',
@@ -30,8 +30,13 @@ export class SpendManagerComponent implements OnInit {
 
   dataSource: MatTableDataSource<Spend>;
   ngOnInit() {
-    this.expenditureServiceService.getAll().subscribe(result => {
+    this.expenditureService.getAll().subscribe(result => {
       this.dataSource = new MatTableDataSource<Spend>(result);
+    });
+    this.expenditureService.expenditureServiceObservable.subscribe(o => {
+      this.expenditureService.getAll().subscribe(result => {
+        this.dataSource = new MatTableDataSource<Spend>(result);
+      });
     });
   }
 
@@ -49,11 +54,7 @@ export class SpendManagerComponent implements OnInit {
       data: spend
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.expenditureServiceService.getAll().subscribe(o => {
-        this.dataSource = new MatTableDataSource<Spend>(o);
-      });
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 }
 

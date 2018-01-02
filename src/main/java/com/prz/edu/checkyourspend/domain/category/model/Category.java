@@ -1,11 +1,10 @@
 package com.prz.edu.checkyourspend.domain.category.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.prz.edu.checkyourspend.domain.user.model.User;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -16,4 +15,10 @@ public class Category {
     private Long id;
 
     private String name;
+
+    private String description;
+
+    @JsonIgnore
+    @ManyToOne
+    private User user;
 }

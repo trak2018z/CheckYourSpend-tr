@@ -1,0 +1,23 @@
+.c-app-categories-manager-headers .mat-expansion-panel-header-title,
+.c-app-categories-manager-headers-align
+  .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.c-app-categories-manager-headers-align
+  .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+.c-app-categories-manager-field {
+  width: 100%;
+  margin: 5px;
+}
+
+.c-app-categories-manager-field-margin {
+    margin: 5px;
+}
+
+.c-app-categories-manager-panel{
+    margin-bottom: 5px;
+}

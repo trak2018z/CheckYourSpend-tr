@@ -1,4 +1,5 @@
-import { ExpenditureServiceService } from './core/service/expenditure-service.service';
+import { CategoryService } from './core/service/category.service';
+import { ExpenditureService } from './core/service/expenditure.service';
 import { SignupService } from './core/service/signup.service';
 import { AuthService } from './core/security/auth.service';
 import { NgModule } from '@angular/core';
@@ -70,7 +71,8 @@ import { CategoriesManagerComponent } from './components/categories-manager/cate
     },
     AuthService,
     SignupService,
-    ExpenditureServiceService,
+    ExpenditureService,
+    CategoryService,
     DatePipe
   ],
   bootstrap: [AppComponent]

@@ -3,7 +3,7 @@
     Your Last Spends:
   </mat-card-header>
   <mat-card-content>
-    <div fxFlex fxLayoutAlign="center">
+    <div fxFlex fxLayout='column' fxLayoutAlign="center">
       <mat-table #table [dataSource]="dataSource" style="width: 100%">
         <ng-container matColumnDef="position">
           <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
@@ -36,6 +36,8 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
+      <mat-paginator [length]="resultsLength" [pageSize]="pageSize" [pageSizeOptions]="[10, 15, 25]" (page)="onPaginateChange($event)">
+      </mat-paginator>
     </div>
   </mat-card-content>
 </mat-card>

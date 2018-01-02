@@ -1,7 +1,17 @@
+import { CategoryService } from './../../../../../core/service/category.service';
+import { Category } from './../../../../categories-manager/model/category';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Spend } from './../../model/spend';
-import { ExpenditureServiceService } from './../../../../../core/service/expenditure-service.service';
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { ExpenditureService } from './../../../../../core/service/expenditure.service';
+import {
+  Component,
+  OnInit,
+  Inject,
+  Input,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -10,6 +20,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./spend-desinger.component.scss']
 })
 export class SpendDesingerComponent implements OnInit {
+  @Output()
+  public spendDesinger: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {}
@@ -31,12 +44,16 @@ export class SpendDesingerComponent implements OnInit {
 export class SpendDesingerDialogComponent implements OnInit {
   public spend: Spend = new Spend();
 
+  public categories: Category[] = [];
+
   constructor(
+    private router: Router,
     public dialogRef: MatDialogRef<SpendDesingerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
-    private expenditureServiceService: ExpenditureServiceService,
-    private toastr: ToastrService
+    private expenditureService: ExpenditureService,
+    private toastr: ToastrService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit() {
@@ -47,6 +64,9 @@ export class SpendDesingerDialogComponent implements OnInit {
       this.spend.description = this.data.description;
       this.spend.value = this.data.value;
     }
+    this.categoryService.getAll().subscribe(result => {
+      this.categories = result;
+    });
   }
 
   onCloseDialog(spend?: Spend): void {
@@ -54,8 +74,9 @@ export class SpendDesingerDialogComponent implements OnInit {
   }
 
   save() {
-    this.expenditureServiceService.save(this.spend).subscribe(o => {
+    this.expenditureService.save(this.spend).subscribe(o => {
       this.toastr.success('The Expenditure has been saved', 'Expenditure');
+      this.expenditureService.expenditureServiceObserver.next(true);
       this.onCloseDialog(o);
     });
   }

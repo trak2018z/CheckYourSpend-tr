@@ -1,0 +1,43 @@
+<div fxLayoutAlign="center">
+  <div fxFlex="60">
+    <mat-accordion class="c-app-categories-manager-headers-align">
+      <mat-expansion-panel class="c-app-categories-manager-panel" *ngFor="let category of categories; let i = index" [expanded]="step === i + 1" (opened)="setStep(i + 1)"
+        hideToggle="true">
+        <mat-expansion-panel-header>
+          <div fxFlex="50">
+            <mat-panel-title>
+              {{category.name}}
+            </mat-panel-title>
+          </div>
+          <div fxFlex="50">
+            <mat-panel-description>
+              Manage a category
+              <mat-icon>settings</mat-icon>
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+        <div fxFlex="50" class="c-app-categories-manager-field-margin">
+          <mat-form-field class="c-app-categories-manager-field">
+            <input matInput placeholder="Name" [(ngModel)]="category.name">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="c-app-categories-manager-field-margin">
+          <mat-form-field class="c-app-categories-manager-field">
+            <input matInput placeholder="Description" [(ngModel)]="category.description">
+          </mat-form-field>
+        </div>
+        <mat-action-row>
+          <button mat-button (click)="cancel(category)">Cancel</button>
+          <button mat-button color="primary" (click)="save(category)">Save</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<div style="position: fixed;
+right: 40px;
+bottom: 40px;">
+  <button mat-fab (click)="addNewCategory()">
+    <mat-icon aria-label="Add new category">add</mat-icon>
+  </button>
+</div>

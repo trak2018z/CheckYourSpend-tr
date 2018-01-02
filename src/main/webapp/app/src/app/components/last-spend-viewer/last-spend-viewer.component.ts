@@ -1,6 +1,7 @@
+import { ExpenditureService } from './../../core/service/expenditure.service';
 import { Spend } from './../spend-manager/spend/model/spend';
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-last-spend-viewer',
@@ -8,6 +9,8 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./last-spend-viewer.component.scss']
 })
 export class LastSpendViewerComponent implements OnInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns = [
     'position',
     'description',
@@ -17,68 +20,26 @@ export class LastSpendViewerComponent implements OnInit {
     'action'
   ];
 
-  dataSource = new MatTableDataSource<Spend>(ELEMENT_DATA);
+  dataSource: MatTableDataSource<Spend>;
 
-  constructor() {}
+  resultsLength: number = 0;
 
-  ngOnInit() {}
-}
+  pageSize = 10;
 
-const ELEMENT_DATA: Spend[] = [
-  {
-    id: 1,
-    description: 'Spend 1',
-    value: 100,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 2,
-    description: 'Spend 2',
-    value: 101,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 3,
-    description: 'Spend 3',
-    value: 102,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 4,
-    description: 'Spend 4',
-    value: 103,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 5,
-    description: 'Spend 5',
-    value: 100,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 6,
-    description: 'Spend 6',
-    value: 100,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 7,
-    description: 'Spend 7',
-    value: 100,
-    date: new Date(),
-    category: 'Lol'
-  },
-  {
-    id: 8,
-    description: 'Spend 8',
-    value: 100,
-    date: new Date(),
-    category: 'Lol'
+  constructor(private expenditureService: ExpenditureService) {}
+
+  ngOnInit() {
+    this.loadData(0, this.pageSize);
   }
-];
+
+  onPaginateChange(event) {
+    this.loadData(event.pageIndex, event.pageSize);
+  }
+
+  private loadData(page: number, pageSize: number) {
+    this.expenditureService.get(page, pageSize).subscribe(result => {
+      this.resultsLength = result.totalElements;
+      this.dataSource = new MatTableDataSource<Spend>(result.content);
+    });
+  }
+}
