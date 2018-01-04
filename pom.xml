@@ -16,7 +16,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <npm.executable>npm.cmd</npm.executable>
+        <npm.executable>\usr\bin\npm</npm.executable>
         <npm.extraparam1></npm.extraparam1>
         <npm.extraparam2></npm.extraparam2>
     </properties>
