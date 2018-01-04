@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping(value = "/expenditure")
+@RequestMapping(value = "/api/expenditure")
 public class ExpenditureController {
 
     private ExpenditureService expenditureService;
@@ -16,7 +16,7 @@ public class ExpenditureController {
         this.expenditureService = expenditureService;
     }
 
-    @PostMapping(value = "/save/save")
+    @PostMapping(value = "/save")
     public ResponseEntity addNewExpenditure(@RequestBody ExpenditureDto expenditureDto) {
         return ResponseEntity.ok(expenditureService.save(expenditureDto));
     }
