@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: checkyourspend
-        image: registry.gitlab.com/rad1317/checkyourspend:1.0.0
+        image: registry.gitlab.com/rad1317/checkyourspend
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
