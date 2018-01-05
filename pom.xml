@@ -16,9 +16,6 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <npm.executable>npm</npm.executable>
-        <npm.extraparam1></npm.extraparam1>
-        <npm.extraparam2></npm.extraparam2>
     </properties>
 
     <dependencies>
@@ -80,41 +77,39 @@
                 <finalName>check-your-spend</finalName>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.6.0</version>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
+                            <execution>
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <configuration>
+                                    <workingDirectory>src/main/webapp/app</workingDirectory>
+                                    <nodeVersion>v4.6.0</nodeVersion>
+                                    <npmVersion>2.15.9</npmVersion>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>npm install</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>npm</goal>
                                 </goals>
-                                <phase>validate</phase>
                                 <configuration>
-                                    <executable>${npm.executable}</executable>
                                     <workingDirectory>src/main/webapp/app</workingDirectory>
-                                    <arguments>
-                                        <argument>${npm.extraparam1}</argument>
-                                        <argument>${npm.extraparam2}</argument>
-                                        <argument>install</argument>
-                                    </arguments>
+                                    <arguments>install</arguments>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>npm run build(compile)</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>npm</goal>
                                 </goals>
-                                <phase>validate</phase>
                                 <configuration>
-                                    <executable>${npm.executable}</executable>
                                     <workingDirectory>src/main/webapp/app</workingDirectory>
-                                    <arguments>
-                                        <argument>${npm.extraparam1}</argument>
-                                        <argument>${npm.extraparam2}</argument>
-                                        <argument>run</argument>
-                                        <argument>build</argument>
-                                    </arguments>
+                                    <arguments>run build</arguments>
                                 </configuration>
                             </execution>
                         </executions>
