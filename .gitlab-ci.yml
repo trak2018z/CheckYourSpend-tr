@@ -14,7 +14,7 @@ stages:
 maven-build:
   image: maven:3-jdk-8
   stage: build
-  script: "mvn install -P prod"
+  script: "mvn package -B -P prod"
   artifacts:
     paths:
       - target/*.jar
