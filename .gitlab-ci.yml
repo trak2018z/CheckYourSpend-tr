@@ -24,9 +24,9 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/rad1317/checkyourspend:'${version}' .
+  - docker build -t registry.gitlab.com/rad1317/checkyourspend:${version} .
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  - docker push registry.gitlab.com/rad1317/checkyourspend:'${version}'
+  - docker push registry.gitlab.com/rad1317/checkyourspend:${version}
 
 k8s-deploy:
   image: google/cloud-sdk
