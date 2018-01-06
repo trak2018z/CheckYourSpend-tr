@@ -3,11 +3,9 @@ services:
   - docker:dind
 
 variables:
-  VERSION: 1.0.1
-
-variables:
   DOCKER_DRIVER: overlay
   SPRING_PROFILES_ACTIVE: gitlab-ci
+  VERSION: $CI_PIPELINE_ID
 
 stages:
   - build
@@ -25,9 +23,9 @@ maven-build:
 docker-build:
   stage: package
   script:
-  - docker build -t registry.gitlab.com/rad1317/checkyourspend:"$VERSION" .
+  - docker build -t registry.gitlab.com/rad1317/checkyourspend:$VERSION .
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-  - docker push registry.gitlab.com/rad1317/checkyourspend:"$VERSION"
+  - docker push registry.gitlab.com/rad1317/checkyourspend:$VERSION
 
 k8s-deploy:
   image: google/cloud-sdk
@@ -42,3 +40,8 @@ k8s-deploy:
   - kubectl delete secret registry.gitlab.com
   - kubectl create secret docker-registry registry.gitlab.com --docker-server=https://registry.gitlab.com --docker-username=rad1317 --docker-password=$REGISTRY_PASSWD --docker-email=rad1317@wp.pl
   - kubectl apply -f deployment.yml
+  environment:
+    name: GoogleCloud
+    url: http://35.205.232.23
+  only:
+  - master
