@@ -1,15 +1,14 @@
-import { ExpenditureService } from './../../../../../core/service/expenditure.service';
 import { DatePipe } from '@angular/common';
-import { Spend } from './../../../../spend-manager/spend/model/spend';
-import { MatTableDataSource } from '@angular/material';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Spend } from '../../../../spend-manager/spend/model/spend';
+import { ExpenditureService } from '../../../../../core/service/expenditure.service';
 
 @Component({
-  selector: 'app-charts-bar-vertical',
-  templateUrl: './charts-bar-vertical.component.html',
-  styleUrls: ['./charts-bar-vertical.component.scss']
+  selector: 'app-chart-bar-horizontal',
+  templateUrl: './chart-bar-horizontal.component.html',
+  styleUrls: ['./chart-bar-horizontal.component.scss']
 })
-export class ChartsBarVerticalComponent implements OnInit {
+export class ChartBarHorizontalComponent implements OnInit {
   private initData: Spend[] = [];
 
   single: any[];

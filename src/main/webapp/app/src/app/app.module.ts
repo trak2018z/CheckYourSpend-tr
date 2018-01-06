@@ -11,7 +11,6 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { AuthRequestOptions } from './core/security/auth-request';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './core/security/token-interceptor';
 import { MaterialModule } from './core/material/material/material.module';
@@ -32,6 +31,7 @@ import {
 import { DialogManagerComponent } from './components/home/dialog-manager/dialog-manager.component';
 import { LastSpendViewerComponent } from './components/last-spend-viewer/last-spend-viewer.component';
 import { CategoriesManagerComponent } from './components/categories-manager/categories-manager.component';
+import { ChartBarHorizontalComponent } from './components/chart-manager/charts/components/chart-bar-horizontal/chart-bar-horizontal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import { CategoriesManagerComponent } from './components/categories-manager/cate
     SpendDesingerDialogComponent,
     DialogManagerComponent,
     LastSpendViewerComponent,
-    CategoriesManagerComponent
+    CategoriesManagerComponent,
+    ChartBarHorizontalComponent
   ],
   entryComponents: [
     SpendManagerDialogComponent,
