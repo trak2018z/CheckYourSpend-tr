@@ -1,6 +1,5 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
-version: 1.0.1
 metadata:
   name: checkyourspend
 spec:
@@ -12,7 +11,7 @@ spec:
     spec:
       containers:
       - name: checkyourspend
-        image: registry.gitlab.com/rad1317/checkyourspend
+        image: registry.gitlab.com/rad1317/checkyourspend:"$VERSION"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
