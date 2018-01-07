@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: checkyourspend
-        image: registry.gitlab.com/rad1317/checkyourspend:$CI_PIPELINE_ID
+        image: "registry.gitlab.com/rad1317/checkyourspend:$CI_PIPELINE_ID"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
