@@ -1,8 +1,8 @@
 <div fxLayoutAlign="center">
   <div fxFlex="60">
     <mat-accordion class="c-app-categories-manager-headers-align">
-      <mat-expansion-panel class="c-app-categories-manager-panel" *ngFor="let category of categories; let i = index" [expanded]="step === i + 1" (opened)="setStep(i + 1)"
-        hideToggle="true">
+      <mat-expansion-panel class="c-app-categories-manager-panel" *ngFor="let category of categories; let i = index" [expanded]="step === i + 1"
+        (opened)="setStep(i + 1)" hideToggle="true">
         <mat-expansion-panel-header>
           <div fxFlex="50">
             <mat-panel-title>
@@ -27,6 +27,7 @@
           </mat-form-field>
         </div>
         <mat-action-row>
+          <button *ngIf="category.id" mat-button color="warn" (click)="cancel(category)">Delete</button>
           <button mat-button (click)="cancel(category)">Cancel</button>
           <button mat-button color="primary" (click)="save(category)">Save</button>
         </mat-action-row>
@@ -37,7 +38,7 @@
 <div style="position: fixed;
 right: 40px;
 bottom: 40px;">
-  <button mat-fab (click)="addNewCategory()">
+  <button mat-fab color="accent" (click)="addNewCategory()">
     <mat-icon aria-label="Add new category">add</mat-icon>
   </button>
 </div>

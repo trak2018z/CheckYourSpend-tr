@@ -32,6 +32,7 @@ import { DialogManagerComponent } from './components/home/dialog-manager/dialog-
 import { LastSpendViewerComponent } from './components/last-spend-viewer/last-spend-viewer.component';
 import { CategoriesManagerComponent } from './components/categories-manager/categories-manager.component';
 import { ChartBarHorizontalComponent } from './components/chart-manager/charts/components/chart-bar-horizontal/chart-bar-horizontal.component';
+import { ChartComponent } from './components/chart-manager/charts/components/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ChartBarHorizontalComponent } from './components/chart-manager/charts/c
     DialogManagerComponent,
     LastSpendViewerComponent,
     CategoriesManagerComponent,
-    ChartBarHorizontalComponent
+    ChartBarHorizontalComponent,
+    ChartComponent
   ],
   entryComponents: [
     SpendManagerDialogComponent,

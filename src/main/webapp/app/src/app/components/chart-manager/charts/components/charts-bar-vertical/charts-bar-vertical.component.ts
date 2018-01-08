@@ -1,20 +1,43 @@
+import { ChartType } from './../../../model/chart-type.enum';
+import { ExpenditureChart } from './../../../model/expenditure-chart.interface';
+import { ChartGroupBy } from './../../../model/chart-groupby.enum';
+import { ChartRange } from './../../../model/chart-range.enum';
 import { ExpenditureService } from './../../../../../core/service/expenditure.service';
 import { DatePipe } from '@angular/common';
 import { Spend } from './../../../../spend-manager/spend/model/spend';
 import { MatTableDataSource } from '@angular/material';
 import { Component, OnInit, Input } from '@angular/core';
+import { MATERIAL_COLORS } from '../../../../../core/material/material/material-colors';
+import { Chart } from '../../../model/chart.interface';
 
 @Component({
   selector: 'app-charts-bar-vertical',
   templateUrl: './charts-bar-vertical.component.html',
   styleUrls: ['./charts-bar-vertical.component.scss']
 })
-export class ChartsBarVerticalComponent implements OnInit {
+export class ChartsBarVerticalComponent implements OnInit, Chart {
+  @Input() public chartType: ChartType = ChartType.CHARTS_BAR_VERTICAL;
+
+  private _chartGroup: ChartGroupBy;
+
+  @Input()
+  set chartGroup(chartGroup: ChartGroupBy) {
+    this._chartGroup = chartGroup;
+    this.loadData(this._chartGroup, this._chartRange);
+    this.setXAxisLabel(chartGroup);
+  }
+
+  private _chartRange: ChartRange;
+
+  @Input()
+  set chartRange(chartRange: ChartRange) {
+    this._chartRange = chartRange;
+    this.loadData(this._chartGroup, this._chartRange);
+  }
+
   private initData: Spend[] = [];
 
-  single: any[];
-  multi: any[];
-  data: any[] = [];
+  data: ExpenditureChart[] = [];
 
   view: any[] = ['700', '500'];
 
@@ -29,16 +52,7 @@ export class ChartsBarVerticalComponent implements OnInit {
   yAxisLabel = 'Value';
 
   colorScheme = {
-    domain: [
-      '#F44336',
-      '#E91E63',
-      '#9C27B0',
-      '#673AB7',
-      '#3F51B5',
-      '#2196F3',
-      '#03A9F4',
-      '#00BCD4'
-    ]
+    domain: MATERIAL_COLORS
   };
 
   constructor(
@@ -46,19 +60,26 @@ export class ChartsBarVerticalComponent implements OnInit {
     private expenditureService: ExpenditureService
   ) {}
 
-  ngOnInit() {
-    this.expenditureService.get(0, 10).subscribe(result => {
-      this.initData = result.content;
-      const data = result.content.map(el => {
-        return {
-          name:
-            el.description +
-            ' ' +
-            this.datePipe.transform(el.date, 'dd/MM/yyyy'),
-          value: el.value
-        };
-      });
-      this.data = data;
-    });
+  ngOnInit() {}
+
+  public loadData(groupBy: ChartGroupBy, range: ChartRange): void {
+    if (groupBy != null && range != null) {
+      this.expenditureService
+        .getExpenditureForChart(groupBy, range)
+        .subscribe(result => {
+          this.data = result;
+        });
+    }
+  }
+
+  private setXAxisLabel(groupBy: ChartGroupBy) {
+    switch (groupBy) {
+      case ChartGroupBy.EXPENDITURE:
+        this.xAxisLabel = 'Spend Name';
+        break;
+      case ChartGroupBy.CATEGORY:
+        this.xAxisLabel = 'Category Name';
+        break;
+    }
   }
 }

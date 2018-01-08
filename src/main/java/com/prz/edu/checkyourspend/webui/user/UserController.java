@@ -1,11 +1,8 @@
 package com.prz.edu.checkyourspend.webui.user;
 
-import com.prz.edu.checkyourspend.core.authentication.model.AccountCredentials;
 import com.prz.edu.checkyourspend.domain.user.UserService;
 import com.prz.edu.checkyourspend.webui.user.dto.AccountCredentialsDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

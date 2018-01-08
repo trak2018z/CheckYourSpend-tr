@@ -3,6 +3,7 @@ package com.prz.edu.checkyourspend.assembler;
 import com.prz.edu.checkyourspend.domain.category.model.Category;
 import com.prz.edu.checkyourspend.domain.category.repository.CategoryRepository;
 import com.prz.edu.checkyourspend.domain.expenditure.model.Expenditure;
+import com.prz.edu.checkyourspend.webui.expenditure.dto.ExpenditureChart;
 import com.prz.edu.checkyourspend.webui.expenditure.dto.ExpenditureDto;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +16,10 @@ public class ExpenditureAssembler {
 
     private CategoryRepository categoryRepository;
 
-    public ExpenditureAssembler(CategoryRepository categoryRepository){
+    public ExpenditureAssembler(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
+
     public Expenditure map(ExpenditureDto expenditureDto) {
         Category category = categoryRepository.findByName(expenditureDto.getCategory());
 
@@ -44,5 +46,10 @@ public class ExpenditureAssembler {
 
     public List<ExpenditureDto> map(List<Expenditure> expenditures) {
         return expenditures.stream().map(this::map).collect(Collectors.toList());
+    }
+
+    public List<ExpenditureChart> mapToExpenditureChart(List<Expenditure> expenditures) {
+        return expenditures.stream().map(
+                expenditure -> new ExpenditureChart(expenditure.getDescription(), expenditure.getValue())).collect(Collectors.toList());
     }
 }

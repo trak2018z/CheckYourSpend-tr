@@ -3,7 +3,7 @@
   <div fxFlex>
     <div fxLayoutAlign="end">
       <button *ngIf="isUserLogin" (click)="logout()" class="c-app-main-button" mat-button>LogOut</button>
-      <button *ngIf="!isUserLogin" class="c-app-main-button" mat-button>LogIn</button>
+      <button *ngIf="!isUserLogin" routerLink="/home" class="c-app-main-button" mat-button>LogIn</button>
     </div>
   </div>
 </mat-toolbar>

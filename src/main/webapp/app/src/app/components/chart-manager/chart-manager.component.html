@@ -9,12 +9,24 @@
           <div fxLayout='row' fxLayoutAlign="center">
             <div fxFlex class="c-app-chart-manager-input-padding">
               <mat-form-field class="c-app-chart-manager-full-width">
-                <mat-select placeholder="Chart Type" (ngModelChange)="check()" [(ngModel)]="selectedChartType">
+                <mat-select placeholder="Chart Type" [(ngModel)]="selectedChartType">
                   <mat-option *ngFor="let chartType of chartTypes" [value]="chartType.value">{{ chartType.key }}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div fxFlex class="c-app-chart-manager-input-padding">
+              <mat-form-field class="c-app-chart-manager-full-width">
+                <mat-select placeholder="Group By" [(ngModel)]="selectedChartGroup">
+                  <mat-option *ngFor="let chartGoup of chartGoups" [value]="chartGoup.value">{{ chartGoup.key }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlex class="c-app-chart-manager-input-padding">
+              <mat-form-field class="c-app-chart-manager-full-width">
+                <mat-select placeholder="Range" [(ngModel)]="selectedChartRange">
+                  <mat-option *ngFor="let chartRange of chartRanges" [value]="chartRange.value">{{ chartRange.key }}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
         </div>
@@ -23,8 +35,7 @@
   </mat-card-header>
   <mat-card-content>
     <div fxFlex fxLayoutAlign="center">
-      <app-charts-bar-vertical *ngIf="ChartType.CHARTS_BAR_VERTICAL == selectedChartType"></app-charts-bar-vertical>
-      <app-chart-bar-horizontal *ngIf="ChartType.HORIZONTAL_BAR_CHART == selectedChartType"></app-chart-bar-horizontal>
+      <app-chart #chart [chartType]="selectedChartType" [chartGroup]="selectedChartGroup" [chartRange]="selectedChartRange"></app-chart>
     </div>
   </mat-card-content>
 </mat-card>

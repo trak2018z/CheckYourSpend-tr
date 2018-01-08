@@ -27,6 +27,7 @@ export class CategoriesManagerComponent implements OnInit {
     const category = new Category();
     category.name = 'New Category';
     this.categories.push(category);
+    this.step = this.categories.indexOf(category, 0) + 1;
   }
 
   save(category: Category) {

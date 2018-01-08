@@ -1,19 +1,21 @@
+import { ExpenditureService } from './../../../../../core/service/expenditure.service';
+import { MATERIAL_COLORS } from './../../../../../core/material/material/material-colors';
 import { ExpenditureChart } from './../../../model/expenditure-chart.interface';
 import { ChartRange } from './../../../model/chart-range.enum';
 import { ChartGroupBy } from './../../../model/chart-groupby.enum';
-import { DatePipe } from '@angular/common';
+import { ChartType } from './../../../model/chart-type.enum';
 import { Component, OnInit, Input } from '@angular/core';
-import { Spend } from '../../../../spend-manager/spend/model/spend';
-import { ExpenditureService } from '../../../../../core/service/expenditure.service';
-import { MATERIAL_COLORS } from '../../../../../core/material/material/material-colors';
-import { Chart } from '../../../model/chart.interface';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-chart-bar-horizontal',
-  templateUrl: './chart-bar-horizontal.component.html',
-  styleUrls: ['./chart-bar-horizontal.component.scss']
+  selector: 'app-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss']
 })
-export class ChartBarHorizontalComponent implements OnInit, Chart {
+export class ChartComponent implements OnInit {
+  ChartType = ChartType;
+  @Input() public chartType: ChartType = ChartType.CHARTS_BAR_VERTICAL;
+
   private _chartGroup: ChartGroupBy;
 
   @Input()
@@ -30,8 +32,6 @@ export class ChartBarHorizontalComponent implements OnInit, Chart {
     this._chartRange = chartRange;
     this.loadData(this._chartGroup, this._chartRange);
   }
-
-  private initData: Spend[] = [];
 
   data: ExpenditureChart[] = [];
 

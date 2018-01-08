@@ -7,6 +7,6 @@ export class SignupService {
   constructor(private http: HttpClient) {}
 
   public signup(user): Observable<Boolean> {
-    return this.http.post<Boolean>('./api/sign-up', user);
+    return this.http.post<Boolean>('./api/user/sign-up', user);
   }
 }
