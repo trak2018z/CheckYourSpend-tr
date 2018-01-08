@@ -63,7 +63,9 @@ export class ChartComponent implements OnInit {
       this.expenditureService
         .getExpenditureForChart(groupBy, range)
         .subscribe(result => {
-          this.data = result;
+          this.data = result.filter(
+            (expenditureChart: ExpenditureChart) => expenditureChart.value > 0.0
+          );
         });
     }
   }
